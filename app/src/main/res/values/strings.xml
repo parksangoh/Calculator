@@ -6,5 +6,7 @@
     <string name="sub">뺄셈</string>
     <string name="mul">곱하기</string>
     <string name="div">나누기</string>
+    <string name="reset">RESET</string>
+    <string name="clear">CLEAR</string>
     <string name="result">계산 결과 : </string>
 </resources>

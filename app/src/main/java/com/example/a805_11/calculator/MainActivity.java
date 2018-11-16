@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText text1, text2;
     TextView result;
-    Button button_add, button_sub, button_mul, button_div;
+    Button button_add, button_sub, button_mul, button_div, reset, clear;
 
     Button Numbtn[] = new Button[10];
     Integer NumbtnID[] = {R.id.button_0, R.id.button_1, R.id.button_2, R.id.button_3,
@@ -36,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
         button_mul = findViewById(R.id.button_mul);
         button_div = findViewById(R.id.button_div);
 
+        reset = findViewById(R.id.reset);
+        clear = findViewById(R.id.clear);
+
         for(int i = 0; i < Numbtn.length; i++) {
             Numbtn[i] = findViewById(NumbtnID[i]);
         }
@@ -50,9 +53,29 @@ public class MainActivity extends AppCompatActivity {
                     if(text1.isFocused() == true){
                         num1 = text1.getText().toString() + Numbtn[index].getText().toString();
                         text1.setText(num1);
-                    }else if(text2.isFocused() == true){
+
+                        clear.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                num1 = text1.getText().toString();
+                                num1 = num1.substring(0, num1.length() -1);
+                                text1.setText(num1);
+                            }
+                        });
+                    }
+
+                    else if(text2.isFocused() == true){
                         num2 = text2.getText().toString() + Numbtn[index].getText().toString();
                         text2.setText(num2);
+
+                        clear.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                num2 = text2.getText().toString();
+                                num2 = num2.substring(0, num2.length() - 1);
+                                text2.setText(num2);
+                            }
+                        });
                     }else{
                         Toast.makeText(getApplicationContext(), "먼저 텍스트 란을 선택하세요!", Toast.LENGTH_SHORT).show();
                     }
@@ -97,6 +120,15 @@ public class MainActivity extends AppCompatActivity {
                 num2 = text2.getText().toString();
                 res = Integer.parseInt(num1) / Integer.parseInt(num2);
                 result.setText("계산 결과 : " + res.toString());
+            }
+        });
+
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                text1.setText("");
+                text2.setText("");
+                result.setText("계산 결과 : ");
             }
         });
     }
